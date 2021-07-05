@@ -1,0 +1,73 @@
+DROP DATABASE IF EXISTS controlevendas;
+CREATE DATABASE controlevendas;
+USE controlevendas;
+
+CREATE TABLE usuarios(
+	usuaricodigo   		INT NOT NULL AUTO_INCREMENT,	
+	usuarinome     		VARCHAR(100) NOT NULL,	
+	usuaridescri   		VARCHAR(50) NOT NULL,
+	usuarisenha    		VARCHAR(50) NOT NULL,
+	usuariconfirsenha    	VARCHAR(50) NOT NULL,
+	usuariemail		VARCHAR(100) NOT NULL,
+	usuarinivel		INT(1) NOT NULL DEFAULT '1',
+	usuariativo		BOOLEAN NOT NULL DEFAULT '1',
+	usuaridathor		VARCHAR(50) NOT NULL,	
+	PRIMARY KEY (usuaricodigo),
+	UNIQUE KEY usuaridescri (usuaridescri),
+	KEY usuarinivel (usuarinivel)
+)ENGINE=MyISAM;
+
+CREATE TABLE condicoespagamento(
+	conpagcodigo   		INT NOT NULL AUTO_INCREMENT,		
+	conpagdescri   		VARCHAR(50) NOT NULL,
+	conpagdathor		VARCHAR(30),
+	PRIMARY KEY (conpagcodigo)
+);
+
+CREATE TABLE produtos(
+	produtcodigo           	INT NOT NULL AUTO_INCREMENT,
+	produtcodigofictic     	VARCHAR(100) NOT NULL,	
+	produtdescri           	VARCHAR(100) NOT NULL,	
+	produtqtde             	NUMERIC(10),
+	produtvlruni		NUMERIC(10),
+	produtdathor		VARCHAR(30),
+	PRIMARY KEY (produtcodigo)
+);
+
+CREATE TABLE clientes(
+	clientcodigo  		INT NOT NULL AUTO_INCREMENT,	
+	clientnome    		VARCHAR(100) NOT NULL,	
+	clientaniver  		VARCHAR(20),
+	clientfisjur  		VARCHAR(20) NOT NULL,
+	clientsexo    		VARCHAR(20),	
+	clienttelef   		VARCHAR(20),
+	clientcel     		VARCHAR(20),
+	clientemail   		VARCHAR(50),
+	clientendere  		VARCHAR(50),
+	clientnumero  		VARCHAR(5),
+	clientbairro  		VARCHAR(50),
+	clientcomple  		VARCHAR(50),
+	clientuf      		VARCHAR(2),
+	clientcidade  		VARCHAR(50),
+	clientdathor		VARCHAR(30),
+	PRIMARY KEY (clientcodigo)
+);
+
+CREATE TABLE vendas(
+	vendascodigo   		INT NOT NULL AUTO_INCREMENT,	
+	vendasclientcodigo     	INT NOT NULL,	
+	vendasconpagcodigo    	INT NOT NULL,
+	vendasdathor		VARCHAR(30),	
+	PRIMARY KEY (vendascodigo),
+	FOREIGN KEY (vendasclientcodigo) REFERENCES clientes(clientcodigo),
+	FOREIGN KEY (vendasconpagcodigo) REFERENCES condicoespagamento(conpagcodigo)
+);
+
+CREATE TABLE vendasprodutos(
+	venprocodigo		INT NOT NULL AUTO_INCREMENT,
+	venprovendascodigo   	INT NOT NULL,	
+	venproprodutcodigo	INT NOT NULL,
+	PRIMARY KEY (venprocodigo),
+	FOREIGN KEY (venprovendascodigo) REFERENCES vendas(vendascodigo),
+	FOREIGN KEY (venproprodutcodigo) REFERENCES produtos(produtcodigo)
+);
