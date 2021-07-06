@@ -126,23 +126,23 @@ include('ConectaBD.php');
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a href="formulario.php" class="nav-link">
                                 <i class="nav-icon fas fa-users-cog"></i>
                                 <p>
                                     login
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
                         
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a href="Wizard.php" class="nav-link">
                                 <i class="nav-icon fas fa-users-cog"></i>
                                 <p>
                                     Wizard
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
 
                     </ul>
                 </nav>
